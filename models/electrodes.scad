@@ -6,6 +6,9 @@ CC BY SA 4.0
 //tolerance
 tol = 0.1;
 
+//number of facets in a cylinder
+$fn=40;
+
 //cable information
 cableD = 2;
 cableH  = 20;
@@ -18,9 +21,9 @@ electH = 5;
 
 //cup electrode information
 //internal diameter of the cup
-cupD = 7.5;
+cupD = 6;
 //border Diameter around the cup
-borderD  = 4;
+borderD  = 2;
 //the diameter of the entire electrode
 electrodeOD = cupD+borderD;
 
@@ -79,9 +82,8 @@ difference(){
 
 
 
-/*
-translate([0,30,0]){
-cup_electrode();
-}// end translate
-solid_electrode();
-*/
+
+//translate([0,30,0]){
+//cup_electrode();
+//}// end translate
+//solid_electrode();

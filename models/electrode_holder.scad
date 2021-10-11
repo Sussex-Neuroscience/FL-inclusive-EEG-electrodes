@@ -1,6 +1,6 @@
 use <threadlib/threadlib.scad>
 
-include <./electrodes.scad>
+use <./electrodes.scad>
 
 tipL = 20;
 clipL = 60-1*tipL;//80;
@@ -28,7 +28,7 @@ gelH = 12;
 
 holderH=5;
 holderD=10;
-hairHD=10;
+hairHD=2;
 
 tol = 0.1;
 $fn=40;
@@ -111,24 +111,26 @@ cube([centralBlock+4,centralBlock,clipH]);
         //    tap("M12",turns=2);
         }//end translate
     }//end difference
+
 }//end module clip_attachments
 
 
 
 
-translate([0,0,0]){electrode_cap();}//end translate
-translate([0,20,clipH/2]){clip_attachments();}//endtranslate
-translate([0,-20,0]){gel_holder();}
+//translate([0,0,0]){electrode_cap();}//end translate
+//translate([0,20,clipH/2]){clip_attachments();}//endtranslate
+//translate([0,-20,0]){gel_holder();}
 
 
-/*
+
 difference(){
-cylinder(d=holderD,h=holderH);
-translate([0,0,-tol]){
-solid_electrode();
-}//end translate
+    cylinder(d=holderD,h=holderH);
+    translate([0,0,-tol]){
+        solid_electrode();
+    }//end translate
 }//end difference
 
+/*
 for ( i = [0:45:360-45] ){
     translate([(holderD/2-hairHD)*cos(i), (holderD/2-hairHD)*sin(i), -tol]){
     rotate([0, 0, 0]){
@@ -137,4 +139,5 @@ for ( i = [0:45:360-45] ){
     }
     }
 }
+
 */
