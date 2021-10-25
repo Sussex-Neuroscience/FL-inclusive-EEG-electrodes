@@ -27,7 +27,7 @@ cupD = 4.7;
 //border Diameter around the cup
 //large electrode
 //borderD  = 2;
-borderD  = 1;
+borderD  = 2;
 //the diameter of the entire electrode
 electrodeOD = cupD+borderD;
 
