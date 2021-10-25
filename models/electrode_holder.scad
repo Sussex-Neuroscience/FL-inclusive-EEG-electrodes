@@ -11,24 +11,20 @@ clipHD = 26;
 
 
 
-cableX = 4.5;
-cableY = 20;
-
+//information for the original clip
 gel_thread_specs= thread_specs("M12-ext");
 P = gel_thread_specs[0];
 Dsupport = gel_thread_specs[2];
-
-//echo(Dsupport);
-//echo(P);
-
 gelBD = electrodeOD+5;
 gelCD = Dsupport;
 gelCHole = electrodeOD-cupD;
 gelH = 12;
 
+//information for the holder itself
 holderH=5;
-holderD=10;
-hairHD=2;
+holderSmallD=10;
+hairHD=4;
+holderLargeD=holderSmallD+2*hairHD+2;
 
 tol = 0.1;
 $fn=40;
@@ -125,16 +121,16 @@ cube([centralBlock+4,centralBlock,clipH]);
 module cup_electrode_holder(){
 difference(){
     union(){
-    cylinder(d=holderD,h=holderH-3);
-    cylinder(d=holderD+5,h=1);    
+    cylinder(d=holderSmallD,h=holderH-2.4);
+    cylinder(d=holderLargeD,h=1);    
     }//end union
     translate([0,0,-tol]){
         cup_electrode();
         sphere(d=cupD);
     }//end translate
 for ( i = [65:45:360+25] ){
-    translate([((holderD+5)/2-hairHD)*cos(i), ((holderD+5)/2-hairHD)*sin(i), -tol]){
-    rotate([sin(i)*-45, sin(i)*-45, 0]){
+    translate([(holderSmallD+hairHD)/2*cos(i), (holderSmallD+hairHD)/2*sin(i), -tol]){
+    rotate([0, 0, 0]){
     
     cylinder(d = hairHD,h=holderH+2);
     }//end rotate

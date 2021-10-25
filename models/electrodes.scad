@@ -10,7 +10,7 @@ tol = 0.1;
 $fn=40;
 
 //cable information
-cableD = 2;
+cableD = 4;
 cableH  = 20;
 
 //solid electrode information
@@ -51,7 +51,7 @@ module electrode_positive(){
      cylinder(d=electrodeOD,h=electrodeT);
         sphere(d=cupD);
         
-            translate([0,0,cableD/2]){
+            translate([2,0,cableD/2-1]){
                  rotate([0,90,0]){
             cylinder(d=cableD,h=cableH);
                  }//end rotate
