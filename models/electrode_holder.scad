@@ -1,6 +1,6 @@
 use <threadlib/threadlib.scad>
 
-use <./electrodes.scad>
+include <./electrodes.scad>
 
 tipL = 20;
 clipL = 60-1*tipL;//80;
@@ -122,22 +122,60 @@ cube([centralBlock+4,centralBlock,clipH]);
 //translate([0,-20,0]){gel_holder();}
 
 
-
+module cup_electrode_holder(){
 difference(){
+    union(){
+    cylinder(d=holderD,h=holderH-3);
+    cylinder(d=holderD+5,h=1);    
+    }//end union
+    translate([0,0,-tol]){
+        cup_electrode();
+        sphere(d=cupD);
+    }//end translate
+for ( i = [65:45:360+25] ){
+    translate([((holderD+5)/2-hairHD)*cos(i), ((holderD+5)/2-hairHD)*sin(i), -tol]){
+    rotate([sin(i)*-45, sin(i)*-45, 0]){
+    
+    cylinder(d = hairHD,h=holderH+2);
+    }//end rotate
+    }//end translate
+}//end for
+}//end difference
+
+}//end module
+
+module solid_electrode_holder(){
+difference(){
+    union(){
     cylinder(d=holderD,h=holderH);
+    cylinder(d=holderD+5,h=1);    
+    }//end union
     translate([0,0,-tol]){
         solid_electrode();
     }//end translate
-}//end difference
-
-/*
-for ( i = [0:45:360-45] ){
-    translate([(holderD/2-hairHD)*cos(i), (holderD/2-hairHD)*sin(i), -tol]){
+for ( i = [65:45:360+25] ){
+    translate([((holderD+5)/2-hairHD)*cos(i), ((holderD+5)/2-hairHD)*sin(i), -tol]){
     rotate([0, 0, 0]){
     
     cylinder(d = hairHD,h=holderH+2);
-    }
-    }
-}
+    }//end rotate
+    }//end translate
+}//end for
+}//end difference
 
-*/
+}//end module
+
+module initial_holder(){
+    electrode_cap();
+    translate([0,30,0]){
+    gel_holder();
+    }//end translate
+    translate([-0,-30,2]){
+    clip_attachments();
+    }//end translate
+    }//end module
+
+cup_electrode_holder();
+//solid_electrode_holder();
+//initial_holder();
+//cup_electrode();
