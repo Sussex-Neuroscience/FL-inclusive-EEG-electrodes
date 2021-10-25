@@ -21,9 +21,13 @@ electH = 5;
 
 //cup electrode information
 //internal diameter of the cup
-cupD = 6;
+//large electrode
+//cupD = 6;
+cupD = 4.7;
 //border Diameter around the cup
-borderD  = 2;
+//large electrode
+//borderD  = 2;
+borderD  = 1;
 //the diameter of the entire electrode
 electrodeOD = cupD+borderD;
 

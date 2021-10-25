@@ -23,7 +23,7 @@ gelH = 12;
 //information for the holder itself
 holderH=5;
 holderSmallD=10;
-hairHD=4;
+hairHD=2.5;
 holderLargeD=holderSmallD+2*hairHD+2;
 
 tol = 0.1;
@@ -117,11 +117,45 @@ cube([centralBlock+4,centralBlock,clipH]);
 //translate([0,20,clipH/2]){clip_attachments();}//endtranslate
 //translate([0,-20,0]){gel_holder();}
 
+module cup_electrode_holder_base(){
+    difference(){
+cylinder(d=electrodeOD+hairHD+holderSmallD,h=0.8);
+translate([0,0,-0.2]){
+cylinder(d=electrodeOD-1,h=10);
+
+    }//end translate
+translate([0,0,0.2]){
+cup_electrode();
+}//end translate
+for ( i = [45:45:360] ){
+    translate([((holderSmallD+hairHD)/2+0.5)*cos(i), ((holderSmallD+hairHD)/2+0.5)*sin(i), -tol]){
+    rotate([0, 0, 0]){
+    
+    cylinder(d = hairHD,h=holderH+2);
+    }//end rotate
+    }//end translate
+}//end for
+}//end difference
+}//end module
+module cup_electrode_holder_cap(){
+
+
+difference(){
+cylinder(d=electrodeOD+4,h=electrodeH+2);
+    union(){
+        translate([0,0,-tol])
+cup_electrode();
+    sphere(d=cupD);
+cylinder(d=2,h=electrodeH+5);
+    }//end union
+}//end difference
+
+}//end module
 
 module cup_electrode_holder(){
 difference(){
     union(){
-    cylinder(d=holderSmallD,h=holderH-2.4);
+    cylinder(d=holderSmallD,h=holderH-2.3);
     cylinder(d=holderLargeD,h=1);    
     }//end union
     translate([0,0,-tol]){
@@ -171,7 +205,15 @@ module initial_holder(){
     }//end translate
     }//end module
 
-cup_electrode_holder();
 //solid_electrode_holder();
 //initial_holder();
 //cup_electrode();
+
+difference(){
+translate([0,0,-0.2])
+cup_electrode_holder_base();
+cup_electrode_holder_cap();
+    }
+
+    translate([20,10,0])
+  cup_electrode_holder_cap();
