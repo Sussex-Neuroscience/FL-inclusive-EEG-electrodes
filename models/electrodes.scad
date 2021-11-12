@@ -10,7 +10,7 @@ tol = 0.1;
 $fn=40;
 
 //cable information
-cableD = 4;
+cableD = 3.5;
 cableH  = 20;
 
 //solid electrode information
@@ -23,6 +23,7 @@ electH = 5;
 //internal diameter of the cup
 //large electrode
 //cupD = 6;
+//small electrode
 cupD = 4.7;
 //border Diameter around the cup
 //large electrode
@@ -91,3 +92,5 @@ difference(){
 //cup_electrode();
 //}// end translate
 //solid_electrode();
+
+//cup_electrode();

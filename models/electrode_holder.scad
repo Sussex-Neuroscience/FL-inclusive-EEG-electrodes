@@ -1,10 +1,10 @@
-use <threadlib/threadlib.scad>
+use <C:\Users\Andre Maia Chagas\Documents\OpenSCAD\libraries\threadlib\threadlib.scad>
 
-include <./electrodes.scad>
+include <.\electrodes.scad>
 
 tipL = 20;
 clipL = 60-1*tipL;//80;
-clipW = 8.5;
+clipW = 9;
 clipH = 1.5;
 clipHD = 26;
 
@@ -29,7 +29,33 @@ holderLargeD=holderSmallD+2*hairHD+2;
 tol = 0.1;
 $fn=40;
 
+
 module attachment_arm(){    
+
+   hull(){
+        resize([clipL+2*tipL,clipW,clipH*2+1]){
+        sphere(d=1);
+        }  
+     
+    translate([clipL/2+tipL/3,0,-clipH/2]){
+        resize([tipL,clipW-2.5,clipH]){
+        cylinder(d=1,h=1,$fn=3);
+        }//resize
+    }//translate
+     translate([-clipL/2-tipL/3,0,clipH/2]){
+        resize([tipL,clipW-2.5,clipH]){
+            rotate([0,180,0]){
+            cylinder(d=1,h=1,$fn=3);
+            
+            }//rotate
+        }//resize
+    }//translate
+
+}//end hull
+
+}//module
+
+module attachment_arm_legacy(){    
     union(){
     hull(){
     cube([clipL,clipW,clipH],center=true);
@@ -95,17 +121,21 @@ module clip_attachments(){
         attachment_arm();
 }//end translate
 }//end for
-centralBlock = 2*clipW;
-translate([-(centralBlock+4)/2,-(centralBlock)/2,-clipH/2]){
-cube([centralBlock+4,centralBlock,clipH]);
+centralBlock = 2*clipW-1;
+translate([-(centralBlock+4)/2,-(centralBlock)/2,-clipH/2-0.5]){
+cube([centralBlock+4,centralBlock,clipH+1]);
 
 }//end translate
 }//end union
         translate([0,0,-2*clipH]){    
         //translate([0,0,-.5]){    
-        cylinder(d=10,h=4*clipH);
+        cylinder(d=12+2*tol,h=4*clipH);
         //    tap("M12",turns=2);
         }//end translate
+        translate([-(clipL+2*tipL)/2-1,-1.5*clipW,-6.8]){
+            cube([clipL+2*tipL+2,clipW*3,6]);
+}//end translate
+
     }//end difference
 
 }//end module clip_attachments
@@ -199,6 +229,7 @@ module initial_holder(){
     electrode_cap();
     translate([0,30,0]){
     gel_holder();
+    //cup_electrode();
     }//end translate
     translate([-0,-30,2]){
     clip_attachments();
@@ -207,8 +238,8 @@ module initial_holder(){
 
 //solid_electrode_holder();
 //initial_holder();
-//cup_electrode();
 
+/*
 difference(){
 translate([0,0,-0.2])
 cup_electrode_holder_base();
@@ -217,3 +248,21 @@ cup_electrode_holder_cap();
 
     translate([20,10,0])
   cup_electrode_holder_cap();
+    
+*/    
+module simple_holder(){
+    difference(){
+        cylinder(d=10,h=5);
+        translate([0,0,0.4]){
+            cup_electrode();
+            }//end translate
+        translate([0,0,-1]){
+            cylinder(d=6,h=10);
+            }//end translate
+        translate([2,-2,0.4]){
+            cube([4,4,10]);
+            }//end translate
+    }//end difference
+}// end module
+    
+//simple_holder();
