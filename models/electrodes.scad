@@ -10,7 +10,7 @@ tol = 0.1;
 $fn=40;
 
 //cable information
-cableD = 2;
+cableD = 3.5;
 cableH  = 20;
 
 //solid electrode information
@@ -21,8 +21,13 @@ electH = 5;
 
 //cup electrode information
 //internal diameter of the cup
-cupD = 6;
+//large electrode
+//cupD = 6;
+//small electrode
+cupD = 4.7;
 //border Diameter around the cup
+//large electrode
+//borderD  = 2;
 borderD  = 2;
 //the diameter of the entire electrode
 electrodeOD = cupD+borderD;
@@ -51,7 +56,7 @@ module electrode_positive(){
      cylinder(d=electrodeOD,h=electrodeT);
         sphere(d=cupD);
         
-            translate([0,0,cableD/2]){
+            translate([2,0,cableD/2-1]){
                  rotate([0,90,0]){
             cylinder(d=cableD,h=cableH);
                  }//end rotate
@@ -87,3 +92,5 @@ difference(){
 //cup_electrode();
 //}// end translate
 //solid_electrode();
+
+//cup_electrode();
