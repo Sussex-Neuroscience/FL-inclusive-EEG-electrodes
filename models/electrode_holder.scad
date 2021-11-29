@@ -134,7 +134,7 @@ difference(){
     }//end translate
 for ( i = [65:45:360+25] ){
     translate([((holderD+5)/2-hairHD)*cos(i), ((holderD+5)/2-hairHD)*sin(i), -tol]){
-    rotate([sin(i)*-45, sin(i)*-45, 0]){
+    rotate([0, 0, 0]){
     
     cylinder(d = hairHD,h=holderH+2);
     }//end rotate
