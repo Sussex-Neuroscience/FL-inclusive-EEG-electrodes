@@ -22,14 +22,17 @@ electH = 5;
 //cup electrode information
 //internal diameter of the cup
 //large electrode
-//cupD = 6;
+cupD_large = 8.80;
 //small electrode
 cupD = 4.7;
 //border Diameter around the cup
 //large electrode
-//borderD  = 2;
+//borderD_large  = 2;
 borderD  = 2;
 //the diameter of the entire electrode
+//large electrode
+electrodeOD_large = cupD_large+borderD;
+//small electrode
 electrodeOD = cupD+borderD;
 
 //hole on top of cup
@@ -52,7 +55,30 @@ module solid_electrode(){
         
 }//end electrode
 
-module electrode_positive(){
+
+module electrode_positive_large(){
+    cylinder(d=electrodeOD_large,h=electrodeT);
+    sphere(d=cupD_large);
+        
+    translate([2,0,cableD/2-1]){
+        rotate([0,90,0]){
+            cylinder(d=cableD,h=cableH);
+            }//end rotate
+        }//end translate
+    }//end module
+
+module electrode_negative_large(){
+    cylinder(d=electrodeOpening,h=electrodeH+5);
+        translate([0,0,-electrodeT]){
+            sphere(d=cupD_large-electrodeT);
+            }//end translate
+        translate([-electrodeOD_large/2-1,-electrodeOD_large/2-1,-electrodeOD_large+0.01]){
+            cube([electrodeOD_large+2,electrodeOD_large+2 ,electrodeOD_large]);
+            }//end translate
+    }//end module
+
+
+module electrode_positive_small(){
      cylinder(d=electrodeOD,h=electrodeT);
         sphere(d=cupD);
         
@@ -64,7 +90,7 @@ module electrode_positive(){
         }//end translate
     }//end module
 
-module electrode_negative(){
+module electrode_negative_small(){
     cylinder(d=electrodeOpening,h=electrodeH+5);
         translate([0,0,-electrodeT]){
         
@@ -75,17 +101,25 @@ module electrode_negative(){
             }//end translate
     }//end module
     
-module cup_electrode(){
+module cup_electrode_small(){
 
 difference(){    
-    electrode_positive();
-    electrode_negative();
+    electrode_positive_small();
+    electrode_negative_small();
     
 
     }//end difference
 }//end electrode module
 
+module cup_electrode_large(){
 
+difference(){    
+    electrode_positive_large();
+    electrode_negative_large();
+    
+
+    }//end difference
+}//end electrode module
 
 
 //translate([0,30,0]){
@@ -93,4 +127,5 @@ difference(){
 //}// end translate
 //solid_electrode();
 
-//cup_electrode();
+//cup_electrode_large();
+//cup_electrode_small();
