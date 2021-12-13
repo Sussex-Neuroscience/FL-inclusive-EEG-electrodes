@@ -25,6 +25,7 @@ gelH = 12;
 //information for the holder itself
 holderH=5;
 holderD=10;
+//diameter of the holes to pass hair through
 hairHD=4;
 
 
@@ -33,6 +34,46 @@ $fn=40;
 
 
 
+
+
+module ring(outerD=10,innerD=9,hei=10){
+    difference(){
+        cylinder(d=outerD,h=hei);
+        translate([0,0,-1]){
+            cylinder(d=innerD,h=hei+2);    
+            }//end translate
+        }// end difference
+    }//end module
+
+module ring_slits(nSlits=3,outerD=10,hei=10){
+    difference(){
+    ring(outerD=outerD,innerD=outerD-hairHD,hei=hei);
+    for ( i = [0:360/nSlits:360] ){
+        rotate([0,0,i]){
+            translate([-0.75,0,-1]){
+            cube([1.5,outerD+2,hei+2]);
+            }//end translate
+            }//end rotate
+        }//end for
+    }//end difference
+    }//end module
+
+//ring_slits();
+/*
+module quarter_ring(outerD=10,innerD=9,hei=10){
+    difference(){
+        ring(outerD=outerD,innerD=innerD,hei=hei);
+        union(){
+            translate([-outerD/2-1,0,-1])
+                cube([(outerD+2),(outerD+1)/2,hei+2]);
+            translate([0,-outerD/2-1,-1])
+                cube([(outerD+2)/2,(outerD+2),hei+2]);
+        }//end union
+    }//end difference
+    }//end module
+
+quarter_ring();
+    */
 module simple_holder_flex(){
     difference(){
         cylinder(d=electrodOD1+2,h=5);
@@ -194,20 +235,52 @@ difference(){
     }//end difference
 }//end module
 
+module flex_holder_base_long_slit(){
+difference(){
+    cylinder(d=electrodOD1+hairHD+holderD,h=0.8);
+    
+    
+    
+    translate([0,0,-0.2]){
+        rotate([0,0,45]){
+        ring_slits(nSlits=4,outerD=electrodOD1+holderD,hei=5);
+        }//end rotate
+        cylinder(d=electrodOD1-1,h=10);
+
+        }//end translate
+    translate([0,0,0.2]){
+        cup_electrode_large();
+    }//end translate
+    //for ( i = [45:45:360] ){
+    //    translate([((holderD+hairHD)/2+2)*cos(i), ((holderD+hairHD)/2+2)*sin(i), -tol]){
+    //        rotate([0, 0, 0]){
+                
+                //cylinder(d = hairHD,h=holderH+2);
+    //        }//end rotate
+    //    }//end translate
+    //}//end for
+    }//end difference
+}//end module
+
+/////// flex holder /////////////////
+
+    
+translate([-10,20,-0.8]){
+simple_holder_flex();
+flex_holder_base_long_slit();
+       }
 
 
-//simple_holder_flex();
+//////////////////////////
+
+////////// original holder ////////////////
+/*
 clip_attachments();
     translate([-1,0,-0.8]){
 simple_holder_rigid();
         //cup_electrode_large();
     }//end translate
-
-//    
-//translate([-10,20,-0.8]){
-//simple_holder_flex();
-//flex_electrode_holder_base();
-//       }
+*/
 
 ////////////////////////////////////////////
 ////////////////////////////////////////////
@@ -307,6 +380,8 @@ cup_electrode_holder_cap();
   cup_electrode_holder_cap();
     
 */    
+
+/*
 module attachment_arm_legacy(){    
     union(){
     hull(){
@@ -331,4 +406,5 @@ module attachment_arm_legacy(){
 }
 }//end union
 }//module
+   */
    
