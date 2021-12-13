@@ -243,7 +243,7 @@ difference(){
     
     translate([0,0,-0.2]){
         rotate([0,0,45]){
-        ring_slits(nSlits=4,outerD=electrodOD1+holderD,hei=5);
+        ring_slits(nSlits=5,outerD=electrodOD1+holderD,hei=5);
         }//end rotate
         cylinder(d=electrodOD1-1,h=10);
 
