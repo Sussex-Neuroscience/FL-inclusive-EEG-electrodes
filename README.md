@@ -1,10 +1,28 @@
-# FL-inclusive-EEG-electrodes
-A system to fit EEG electrodes in all types of hair
+# inclusive-EEG-electrodes
 
 
-### OpenScad libraries
-The threads in these electrodes are created using the following library:
-- https://github.com/adrianschlatter/threadlib
+EEG caps are not suitable for participants/patients with volumous hair, which creates bias in research data collection and hinders proper diagnostics.
+
+The goal of this project is to design an inclusive system to hold EEG electrodes in place. That is, our holders will work equally well when applied to participants/patients with hair type.
+
+Currently (05/2023) we have a working prototype that is made of 3D printed parts (printed in flexible TPU filament) and hair clips. 
+
+All designs are freely available in this repository and shared under open source licenses. 
+
+The final goal, under development is to have a "cap like system" where researchers and/or clinicians will have a similar experience to current caps, while respecting that people have many different types of hair.
+
+This project has been developed by a number of people:
+
+- Paloma Manguele
+- Chris Racey
+- Andre Maia Chagas
+- Claudia Lawrence
+- Benjamin Tribe
+
+
+
+![](inclusiveElectrodesDemoday_final.png)
+
 
 
 ### electronic components
@@ -15,4 +33,4 @@ The threads in these electrodes are created using the following library:
 - wires: 
 
 
-https://twitter.com/openneurosci/status/1488879713368092673?s=20&t=PgYXQ4UcoFlw8ASvpN15Sw
+
