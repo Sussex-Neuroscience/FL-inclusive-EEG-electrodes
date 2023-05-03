@@ -1,7 +1,7 @@
 # inclusive-EEG-electrodes
 
 
-EEG caps are not suitable for participants/patients with volumous hair, which creates bias in research data collection and hinders proper diagnostics.
+EEG caps are not suitable for participants/patients with volumous, thick or curly hair, which creates bias in research data collection and hinders proper diagnostics.
 
 The goal of this project is to design an inclusive system to hold EEG electrodes in place. That is, our holders will work equally well when applied to participants/patients with hair type.
 
@@ -9,7 +9,7 @@ Currently (05/2023) we have a working prototype that is made of 3D printed parts
 
 All designs are freely available in this repository and shared under open source licenses. 
 
-The final goal, under development is to have a "cap like system" where researchers and/or clinicians will have a similar experience to current caps, while respecting that people have many different types of hair.
+The final goal, under development is to have a "cap like system" where researchers and/or clinicians, particularly those with limited funds/resources will have a similar experience to current caps, while respecting that people have many different types of hair. A first prototype of the cap itself can be found [here](https://github.com/Sussex-Neuroscience/inclusive-eeg-cap)
 
 This project has been developed by a number of people:
 
